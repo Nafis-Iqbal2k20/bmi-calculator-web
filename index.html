@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="" content="">
+  <title>BMI Calculator</title>
+</head>
+<style type="text/css" media="all">
+  input, button {
+    display: flex;
+    border-radius: 15px;
+    border: 1px solid green;
+    color: green;
+    font-size: 18px;
+    width: 100%;
+  }
+  label {
+    color: green;
+  }
+  button {
+    margin-top: 15px;
+    background-color: green;
+    border: none;
+    padding: 5px 70px;
+    width: 100%;
+    color: white;
+  }
+  .maindiv {
+    display: flex;
+    justify-content: center;
+    margin: 0px 5px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    box-shadow: 5px 5px 10px dimgray;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px dotted green;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid green;
+  }
+  h1, h3 {
+    color: green;
+    text-align: center;
+  }
+  img {
+    width: 100%;
+    height: 50%;
+  }
+  #low, #over {
+    color: red;
+  }
+</style>
+<body>
+  <div>
+    <h1>BMI Calculator</h1>
+  </div>
+  <div>
+    <img src="img/bmi_image.png" alt="bmi_image" />
+  </div>
+  <div class="maindiv">
+    <div>
+      <label for="Weight">Weight</label>
+      <input type="number" name="Weight" id="Weight" placeholder="Your Weight (kg)" value="" />
+      <br />
+      <label for="Height">Height</label>
+      <input type="number" name="Height" id="Height" placeholder="Your Height (m)" value="" />
+      <button id="bmiBtn"> Calculate👆</button>
+      <h3 id="bmiDisplay"></h3>
+    </div>
+  </div>
+  <script type="text/javascript" charset="utf-8">
+
+    const bmiCalculate = ()=> {
+      const weight = document.getElementById("Weight").value;
+      const height = document.getElementById("Height").value;
+      const bmiBtn = document.getElementById("bmiBtn");
+      const bmiDisplay = document.getElementById("bmiDisplay");
+
+      var weightf = parseFloat(weight);
+      var heightf = parseFloat(height);
+
+      const bmi = (weightf/(heightf*heightf)).toFixed(2);
+
+      if (isNaN(bmi)) {
+        bmiDisplay.innerHTML = `<span id="low">⚠️</br>Please 🥺 Fill Height And Weight Field Properly.</span>`;
+      } else if (bmi < 18.5) {
+        bmiDisplay.innerHTML = `<span id="low">Your BMI Is Low: ${bmi}</span>`;
+      } else if (18.5 < bmi && bmi < 24.9) {
+        bmiDisplay.innerText = ` Your BMI Is Perfect: ${bmi}`;
+      } else {
+        bmiDisplay.innerHTML = `<span id="over">Your BMI Is Over: ${bmi}</span>`;
+      }
+    };
+    bmiBtn.addEventListener("click", bmiCalculate);
+  </script>
+</body>
+</html>
